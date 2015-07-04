@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport"/>
+        <title><%=title%></title>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+	<script type="text/javascript" src="javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.qqFace.js"></script>
+	<script type="text/javascript" src="javascripts/soundmanager2-jsmin.js"></script>
+        <!--[if lt IE 8]><script src="javascripts/json3.min.js"></script><![endif]-->
+        <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('.emotion').qqFace({
+			id : 'facebox', //表情盒子的ID
+			assign:'content', //给那个控件赋值
+			path:'/face/'	//表情存放的路径
+		});
+	});
+	</script>
+	<style>
+	span.emotion{width:42px; height:20px; background:url(icon.gif) no-repeat 2px 2px; padding:0 20px; cursor:pointer; line-height: 2}
+	span.emotion:hover{background-position:2px -28px}
+	.qqFace{margin-top:4px;background:#fff;padding:2px;border:1px #dfe6f6 solid;}
+	.qqFace table td{padding:0px;}
+	.qqFace table td img{cursor:pointer;border:1px #fff solid;}
+	.qqFace table td img:hover{border:1px #0066cc solid;}
+	.header{background:#3d3d3d;height: 28px; width: 100%;font-size:12px;position:fixed;top:0;z-index:99999}
+	.sp_wrap{line-height: 28px;color:#fff;}
+	.sp_count{text-align:left;margin-left:10px;}
+	.sp_uname{float:right; margin-right:10px;}
+	.div_users{background:#EFEFFF; padding:5px; font-size:12px; margin:0; color:#666;z-index:99999}
+	</style>
+    </head>
+  <body>
+    <div id="chatbox">
+        <!-- 聊天室标题头 -->
+        <div class="header">
+            <div class="sp_wrap">
+                <span class="sp_count">wookvn多人聊天室|当前在线人数:<span id="onlineCount">0</span></span>
+                <span class="sp_uname"><span id="showusername"><%=username%></span> | 
+                <a href="javascript:;" onclick="chat.logout()" style="color:#fff;">退出</a></span>
+            </div>
+	    <div id="onlineusers" class="div_users"></div>
+        </div>
+        <div id="doc">
+            <div id="chat">
+                <div id="message" class="message" style="margin-bottom:44px;">
+		  <section class="system J-mjrlinkWrap J-cutMsg" style="margin-top:14px;">&nbsp;</sction>
+		</div>
+                <div class="input-box" style="position:fixed;bottom:0;">
+		    <span class="emotion">表情</span>
+                    <div class="input">
+                      <input type="text" maxlength="140" placeholder="请输入聊天内容，按Enter提交" id="content" name="content">
+                    </div>
+                    <div class="action">
+                        <button type="button" id="mjr_send" onclick="chat.submitMsg();">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="javascripts/client.js"></script>
+  </body>
+</html>

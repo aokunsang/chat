@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport"/>
+	<title><%=title%></title>
+	<script src="javascripts/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$("form").submit(function(){
+			var uname = $("input[name='username']").val();
+			if(uname == ''){
+				alert("用户昵称不能为空");
+				return false;
+			}
+		});
+	})
+	</script>
+  </head>
+  <body style="margin:auto;">
+	<div id="nickname">
+		</p>
+		<h1>欢迎进入<%=title%>!</h1></p>
+		
+		<h3>
+			<form action="/onchat" method="post">
+			聊天室昵称：<input type="text" name="username"/>
+			<input type="submit" value="进入聊天室" />
+			</form>
+		</h3>
+		<% if(error){ %>
+		  <h4 style="color:red"><%=error%></h4>
+		<% } %>
+	</div>
+  </body>
+</html>
